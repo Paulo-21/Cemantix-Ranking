@@ -1,0 +1,425 @@
+<!doctype html>
+
+<html class="dark" lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Cémantix Friends - Minimalist Dashboard</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "outline-variant": "#494454",
+                            "surface-container-lowest": "#060e20",
+                            "primary-fixed": "#e9ddff",
+                            "error-container": "#93000a",
+                            "on-tertiary": "#67001b",
+                            tertiary: "#ffb2b7",
+                            "on-primary-fixed-variant": "#5516be",
+                            "on-primary-fixed": "#23005c",
+                            "surface-tint": "#d0bcff",
+                            "inverse-on-surface": "#283044",
+                            "primary-fixed-dim": "#d0bcff",
+                            "surface-dim": "#0b1326",
+                            "on-surface": "#dae2fd",
+                            "inverse-surface": "#dae2fd",
+                            "on-background": "#dae2fd",
+                            "secondary-container": "#0566d9",
+                            "surface-container-highest": "#2d3449",
+                            outline: "#958ea0",
+                            "primary-container": "#a078ff",
+                            "secondary-fixed": "#d8e2ff",
+                            "surface-container-low": "#131b2e",
+                            "on-tertiary-fixed-variant": "#92002a",
+                            "inverse-primary": "#6d3bd7",
+                            "on-primary": "#3c0091",
+                            "tertiary-fixed": "#ffdadb",
+                            "on-secondary-container": "#e6ecff",
+                            "on-secondary": "#002e6a",
+                            "surface-container-high": "#222a3d",
+                            surface: "#0b1326",
+                            background: "#0b1326",
+                            "surface-variant": "#2d3449",
+                            "secondary-fixed-dim": "#adc6ff",
+                            "on-surface-variant": "#cbc3d7",
+                            "tertiary-container": "#ff516a",
+                            "on-secondary-fixed": "#001a42",
+                            "on-secondary-fixed-variant": "#004395",
+                            "surface-bright": "#31394d",
+                            secondary: "#adc6ff",
+                            primary: "#d0bcff",
+                            "on-error-container": "#ffdad6",
+                            "on-tertiary-fixed": "#40000d",
+                            "surface-container": "#171f33",
+                            "on-primary-container": "#340080",
+                            "on-tertiary-container": "#5b0017",
+                            "tertiary-fixed-dim": "#ffb2b7",
+                            "on-error": "#690005",
+                            error: "#ffb4ab",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            sm: "8px",
+                            xl: "40px",
+                            base: "4px",
+                            "container-max": "800px",
+                            lg: "24px",
+                            gutter: "24px",
+                            xs: "4px",
+                            xxl: "64px",
+                            md: "16px",
+                        },
+                        fontFamily: {
+                            "display-md": ["Montserrat"],
+                            "label-sm": ["Inter"],
+                            "headline-lg-mobile": ["Montserrat"],
+                            "body-lg": ["Inter"],
+                            "display-lg": ["Montserrat"],
+                            "body-md": ["Inter"],
+                            "headline-lg": ["Montserrat"],
+                        },
+                        fontSize: {
+                            "display-md": [
+                                "36px",
+                                { lineHeight: "1.2", fontWeight: "700" },
+                            ],
+                            "label-sm": [
+                                "12px",
+                                {
+                                    lineHeight: "1",
+                                    letterSpacing: "0.05em",
+                                    fontWeight: "600",
+                                },
+                            ],
+                            "headline-lg-mobile": [
+                                "20px",
+                                { lineHeight: "1.3", fontWeight: "600" },
+                            ],
+                            "body-lg": [
+                                "18px",
+                                { lineHeight: "1.6", fontWeight: "400" },
+                            ],
+                            "display-lg": [
+                                "48px",
+                                {
+                                    lineHeight: "1.1",
+                                    letterSpacing: "-0.02em",
+                                    fontWeight: "700",
+                                },
+                            ],
+                            "body-md": [
+                                "16px",
+                                { lineHeight: "1.5", fontWeight: "400" },
+                            ],
+                            "headline-lg": [
+                                "24px",
+                                { lineHeight: "1.3", fontWeight: "600" },
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background-color: #0b1326;
+                color: #dae2fd;
+                font-family: "Inter", sans-serif;
+            }
+            .material-symbols-outlined {
+                font-variation-settings:
+                    "FILL" 0,
+                    "wght" 400,
+                    "GRAD" 0,
+                    "opsz" 24;
+                vertical-align: middle;
+            }
+            .glass-panel {
+                background: rgba(23, 31, 51, 0.7);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(149, 142, 160, 0.1);
+            }
+            @keyframes pulse-slow {
+                0%,
+                100% {
+                    opacity: 0.8;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+            }
+            .animate-pulse-slow {
+                animation: pulse-slow 3s infinite ease-in-out;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen flex flex-col items-center">
+        <!-- Simple Top Navigation -->
+        <header
+            class="w-full max-w-container-max flex justify-between items-center px-lg py-md lg:py-lg"
+        >
+            <div class="flex flex-col">
+                <h1
+                    class="font-display-md text-display-md text-primary leading-none"
+                >
+                    Cémantix
+                </h1>
+                <p class="font-label-sm text-label-sm text-on-surface-variant">
+                    Friend Rankings
+                </p>
+            </div>
+            <div class="flex gap-md">
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors"
+                >
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant"
+                        >settings</span
+                    >
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors"
+                >
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant"
+                        >account_circle</span
+                    >
+                </button>
+            </div>
+        </header>
+        <!-- Main Content Container -->
+        <main
+            class="w-full max-w-container-max px-lg pb-xxl flex flex-col gap-xl mt-md"
+        >
+            <!-- Score Entry Section -->
+            <section>
+                <div class="flex items-center gap-md mb-lg">
+                    <span class="w-1 h-6 bg-primary rounded-full"></span>
+                    <h2 class="font-headline-lg text-headline-lg">
+                        Saisir son score
+                    </h2>
+                </div>
+                <div class="glass-panel p-lg rounded-2xl">
+                    <form class="flex flex-col md:flex-row gap-md">
+                        <div class="flex-1 group">
+                            <label
+                                class="block font-label-sm text-label-sm text-on-surface-variant mb-xs ml-base"
+                                >NOMBRE D'ESSAIS</label
+                            >
+                            <input
+                                class="w-full bg-surface-container-highest border-none rounded-xl py-md px-lg text-body-lg font-bold text-on-surface focus:ring-2 focus:ring-primary placeholder-on-surface-variant/30 transition-all"
+                                placeholder="Ex: 42"
+                                type="number"
+                            />
+                        </div>
+                        <div class="flex items-end">
+                            <button
+                                class="w-full md:w-auto bg-primary text-on-primary py-md px-xl rounded-xl font-bold font-body-md hover:bg-primary-container hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/10"
+                                type="submit"
+                            >
+                                Envoyer le score
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Leaderboard Section -->
+            <section>
+                <div class="flex items-center justify-between mb-lg">
+                    <div class="flex items-center gap-md">
+                        <span class="w-1 h-6 bg-secondary rounded-full"></span>
+                        <h2 class="font-headline-lg text-headline-lg">
+                            Classement All-Time
+                        </h2>
+                    </div>
+                    <span
+                        class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider hidden sm:block"
+                        >Mise à jour: Il y a 5 min</span
+                    >
+                </div>
+                <div class="glass-panel rounded-2xl overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="bg-surface-container-high border-b border-outline-variant"
+                                >
+                                    <th
+                                        class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase w-20 text-center"
+                                    >
+                                        Rang
+                                    </th>
+                                    <th
+                                        class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase"
+                                    >
+                                        Joueur
+                                    </th>
+                                    <th
+                                        class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-center"
+                                    >
+                                        Points
+                                    </th>
+                                    <th
+                                        class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right"
+                                    >
+                                        Moyenne
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-body-md text-body-md">
+                                <tr
+                                    class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors"
+                                >
+                                    <td class="p-md text-center">
+                                        <span
+                                            class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-primary/20 text-primary font-bold"
+                                            >1</span
+                                        >
+                                    </td>
+                                    <td class="p-md flex items-center gap-md">
+                                        <div class="relative">
+                                            <img
+                                                alt="User Avatar"
+                                                class="w-10 h-10 rounded-full border-2 border-primary/30"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeNliLtOxTC5vspy846oOg00tTTgHiJ5SYDlQCFCW4KA7aSfGm5sElEDEF182l52ZWDj0H8Pkf6jAkymH2ztG_j8d0w62VmreRQULH4QP3iQOWWB5Uadt70Vspr_L1X5UB0VqjWDnK_RmO1A71nb1K0qyBrO1NeGSGnfLMPEnsvR-5k4i4W9NjiOKyZsS37uO46qOwv5tyDEqaQh9PNf6vZU391ijeoqFJ9-T4dmDfT-NoU4tk80RcAl568aag2WzxlAuJ0np9fuY"
+                                            />
+                                            <span
+                                                class="absolute -top-1 -right-1 flex h-4 w-4"
+                                            >
+                                                <span
+                                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                                                ></span>
+                                                <span
+                                                    class="relative inline-flex rounded-full h-4 w-4 bg-primary text-[8px] items-center justify-center text-on-primary"
+                                                    >🔥</span
+                                                >
+                                            </span>
+                                        </div>
+                                        <span class="font-bold">Léa</span>
+                                    </td>
+                                    <td
+                                        class="p-md text-center text-primary font-bold"
+                                    >
+                                        1,240
+                                    </td>
+                                    <td
+                                        class="p-md text-right font-mono text-on-surface-variant"
+                                    >
+                                        72.4
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors"
+                                >
+                                    <td class="p-md text-center">
+                                        <span
+                                            class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant"
+                                            >2</span
+                                        >
+                                    </td>
+                                    <td class="p-md flex items-center gap-md">
+                                        <img
+                                            alt="User Avatar"
+                                            class="w-10 h-10 rounded-full"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX3KdyvVhCHxYGMfZ744ZdJhkzAyPBR7tU8T1PjqF0N7u3H1Ko_IHwvqkk2KDSMCMrovpyI-N0Wq_XlEoVm7RR1heLE6HZhewuP7JxNQEgPNQPw4IMCA2Pzp3ShV5LaOoCKroa15DUvnCbAs4FfMQLW4KzfvKwWo8iV5NDy4cxvo1MMMJUn8lRogVrQv8jlk-40VyCn7jQs9o8di7Dxz8OYX1diHRRud6aPq17dcbM8HEXUdHZON14aoUj5yIsDSNAhXePINLw8Ds"
+                                        />
+                                        <span class="font-bold text-on-surface"
+                                            >Kevin</span
+                                        >
+                                    </td>
+                                    <td
+                                        class="p-md text-center text-secondary font-bold"
+                                    >
+                                        1,115
+                                    </td>
+                                    <td
+                                        class="p-md text-right font-mono text-on-surface-variant"
+                                    >
+                                        81.2
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors"
+                                >
+                                    <td class="p-md text-center">
+                                        <span
+                                            class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant"
+                                            >3</span
+                                        >
+                                    </td>
+                                    <td class="p-md flex items-center gap-md">
+                                        <img
+                                            alt="User Avatar"
+                                            class="w-10 h-10 rounded-full"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-bzg5Nsun_uWgMicRsioyiYKU366CqW4zHrzgCmI7OvKAfnugkkT2AXQIoA7Xj7Vt-vP0CXBH0O6HroxAZPKtNVis3KPMECePMPHeA0WpS4DZKvj2BWIbwRaxfXn-Zz-teACUt2UJX0KZG4FmPhG-8wyInuV3Qikol6cZeiAuHNN7N_kmzh-oPNuXnL8kpxSy5vXxSSj1qVsQ3sa2EGsdJsc2d8AC0fW4EsLJ0nziISN3rznNwRQsF87RO_sTO-3w-GzBQ1GqhkM"
+                                        />
+                                        <span class="font-bold text-on-surface"
+                                            >Sarah</span
+                                        >
+                                    </td>
+                                    <td
+                                        class="p-md text-center text-tertiary font-bold"
+                                    >
+                                        980
+                                    </td>
+                                    <td
+                                        class="p-md text-right font-mono text-on-surface-variant"
+                                    >
+                                        94.8
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="p-md text-center bg-surface-container-low border-t border-outline-variant/30"
+                    >
+                        <button
+                            class="text-secondary font-label-sm text-label-sm uppercase hover:underline hover:text-secondary-fixed transition-colors"
+                        >
+                            Afficher plus de joueurs
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Background Decoration -->
+        <div
+            class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"
+            id="bg-decoration"
+        ></div>
+        <script>
+            // Atmospheric Background Particles
+            const bgContainer = document.getElementById("bg-decoration");
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement("div");
+                const size = Math.random() * 300 + 200;
+                particle.className =
+                    "absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow";
+                particle.style.width = size + "px";
+                particle.style.height = size + "px";
+                particle.style.left = Math.random() * 100 + "%";
+                particle.style.top = Math.random() * 100 + "%";
+                particle.style.background = i % 2 === 0 ? "#d0bcff" : "#0566d9";
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                bgContainer.appendChild(particle);
+            }
+        </script>
+    </body>
+</html>
