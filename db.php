@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 $dbHost = getenv("DB_HOST") ?: "localhost";
 $dbPort = getenv("DB_PORT") ?: "5432";
-$dbName = getenv("DB_NAME") ?: "cemantix_ranking";
-$dbUser = getenv("DB_USER") ?: "postgres";
-$dbPass = getenv("DB_PASSWORD") ?: "";
+$dbName = getenv("DB_NAME") ?: "cemantix_game";
+$dbUser = getenv("DB_USER") ?: "paul";
+$dbPass = getenv("DB_PASSWORD") ?: "CemantixThales";
 
 try {
     $pdo = new PDO(
