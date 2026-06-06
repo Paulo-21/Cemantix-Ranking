@@ -1,315 +1,385 @@
-<!DOCTYPE html><html class="dark" lang="fr"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Cémantix Friends - Minimalist Dashboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "outline-variant": "#494454",
-                    "surface-container-lowest": "#060e20",
-                    "primary-fixed": "#e9ddff",
-                    "error-container": "#93000a",
-                    "on-tertiary": "#67001b",
-                    "tertiary": "#ffb2b7",
-                    "on-primary-fixed-variant": "#5516be",
-                    "on-primary-fixed": "#23005c",
-                    "surface-tint": "#d0bcff",
-                    "inverse-on-surface": "#283044",
-                    "primary-fixed-dim": "#d0bcff",
-                    "surface-dim": "#0b1326",
-                    "on-surface": "#dae2fd",
-                    "inverse-surface": "#dae2fd",
-                    "on-background": "#dae2fd",
-                    "secondary-container": "#0566d9",
-                    "surface-container-highest": "#2d3449",
-                    "outline": "#958ea0",
-                    "primary-container": "#a078ff",
-                    "secondary-fixed": "#d8e2ff",
-                    "surface-container-low": "#131b2e",
-                    "on-tertiary-fixed-variant": "#92002a",
-                    "inverse-primary": "#6d3bd7",
-                    "on-primary": "#3c0091",
-                    "tertiary-fixed": "#ffdadb",
-                    "on-secondary-container": "#e6ecff",
-                    "on-secondary": "#002e6a",
-                    "surface-container-high": "#222a3d",
-                    "surface": "#0b1326",
-                    "background": "#0b1326",
-                    "surface-variant": "#2d3449",
-                    "secondary-fixed-dim": "#adc6ff",
-                    "on-surface-variant": "#cbc3d7",
-                    "tertiary-container": "#ff516a",
-                    "on-secondary-fixed": "#001a42",
-                    "on-secondary-fixed-variant": "#004395",
-                    "surface-bright": "#31394d",
-                    "secondary": "#adc6ff",
-                    "primary": "#d0bcff",
-                    "on-error-container": "#ffdad6",
-                    "on-tertiary-fixed": "#40000d",
-                    "surface-container": "#171f33",
-                    "on-primary-container": "#340080",
-                    "on-tertiary-container": "#5b0017",
-                    "tertiary-fixed-dim": "#ffb2b7",
-                    "on-error": "#690005",
-                    "error": "#ffb4ab"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "sm": "8px",
-                    "xl": "40px",
-                    "base": "4px",
-                    "container-max": "800px",
-                    "lg": "24px",
-                    "gutter": "24px",
-                    "xs": "4px",
-                    "xxl": "64px",
-                    "md": "16px"
-            },
-            "fontFamily": {
-                    "display-md": ["Montserrat"],
-                    "label-sm": ["Inter"],
-                    "headline-lg-mobile": ["Montserrat"],
-                    "body-lg": ["Inter"],
-                    "display-lg": ["Montserrat"],
-                    "body-md": ["Inter"],
-                    "headline-lg": ["Montserrat"]
-            },
-            "fontSize": {
-                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                    "headline-lg-mobile": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
-                    "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+<!doctype html>
+<html class="dark" lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Cemantix Friends - Classements</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            background: "#0b1326",
+                            surface: "#131b2e",
+                            panel: "#171f33",
+                            panelHigh: "#222a3d",
+                            textMain: "#dae2fd",
+                            textMuted: "#aeb8d6",
+                            outline: "#494454",
+                            primary: "#d0bcff",
+                            primaryDark: "#3c0091",
+                            secondary: "#adc6ff",
+                            accent: "#ffb2b7",
+                        },
+                        fontFamily: {
+                            sans: ["Inter", "sans-serif"],
+                            display: ["Montserrat", "sans-serif"],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background: #0b1326;
+                color: #dae2fd;
+                font-family: "Inter", sans-serif;
             }
-          },
-        },
-      }
-    </script>
-<style>
-        body {
-            background-color: #0b1326;
-            color: #dae2fd;
-            font-family: 'Inter', sans-serif;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .glass-panel {
-            background: rgba(23, 31, 51, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(149, 142, 160, 0.1);
-        }
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.4; }
-        }
-        /*.animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }*/
-    </style>
-</head>
-<body class="min-h-screen flex flex-col items-center">
-<!-- Simple Top Navigation -->
-<header class="w-full max-w-container-max flex justify-between items-center px-lg py-md lg:py-lg">
-<div class="flex flex-col">
-<h1 class="font-display-md text-display-md text-primary leading-none">Cémantix</h1>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Stagios Rankings</p>
-</div>
-<div class="flex gap-md">
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">settings</span>
-</button>
-<a href="/cemantix-ranking/signin.html">
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
-</button>
-</a>
-</div>
-</header>
-<!-- Main Content Container -->
-<main class="w-full max-w-container-max px-lg pb-xxl flex flex-col gap-xl mt-md">
-<!-- Score Entry Section -->
-<section>
-<div class="flex items-center gap-md mb-lg">
-<span class="w-1 h-6 bg-primary rounded-full"></span>
-<h2 class="font-headline-lg text-headline-lg">Saisir le mot</h2>
-</div>
-<div class="glass-panel p-lg rounded-2xl">
-<form class="flex flex-col md:flex-row gap-md">
-<div class="flex-1 group">
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs ml-base">NOMBRE D'ESSAIS</label>
-<input class="w-full bg-surface-container-highest border-none rounded-xl py-md px-lg text-body-lg font-bold text-on-surface focus:ring-2 focus:ring-primary placeholder-on-surface-variant/30 transition-all" placeholder="Ex: cap" type="text">
-</div>
-<div class="flex items-end">
-<button class="w-full md:w-auto bg-primary text-on-primary py-md px-xl rounded-xl font-bold font-body-md hover:bg-primary-container hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/10" type="submit">
-                            Envoyer le mot
-                        </button>
-</div>
-</form>
-</div>
-</section>
-<!-- Leaderboard Section -->
-<section>
-<div class="flex items-center justify-between mb-lg">
-<div class="flex items-center gap-md">
-<span class="w-1 h-6 bg-secondary rounded-full"></span>
-<h2 class="font-headline-lg text-headline-lg">Classement du jour</h2>
-</div>
-<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider hidden sm:block">Mise à jour: Il y a 5 min</span>
-</div>
-<div class="glass-panel rounded-2xl overflow-hidden">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-container-high border-b border-outline-variant">
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase w-20 text-center">Rang</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase">Joueur</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-center">Heure de réussite</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Moyenne</th>
-</tr>
-</thead>
-<tbody class="font-body-md text-body-md">
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-primary/20 text-primary font-bold">1</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<div class="relative">
-<img alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeNliLtOxTC5vspy846oOg00tTTgHiJ5SYDlQCFCW4KA7aSfGm5sElEDEF182l52ZWDj0H8Pkf6jAkymH2ztG_j8d0w62VmreRQULH4QP3iQOWWB5Uadt70Vspr_L1X5UB0VqjWDnK_RmO1A71nb1K0qyBrO1NeGSGnfLMPEnsvR-5k4i4W9NjiOKyZsS37uO46qOwv5tyDEqaQh9PNf6vZU391ijeoqFJ9-T4dmDfT-NoU4tk80RcAl568aag2WzxlAuJ0np9fuY">
 
-</div>
-<span class="font-bold">Léa</span>
-</td>
-<td class="p-md text-center text-primary font-bold">1,240</td>
-<td class="p-md text-right font-mono text-on-surface-variant">72.4</td>
-</tr>
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant">2</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<img alt="User Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX3KdyvVhCHxYGMfZ744ZdJhkzAyPBR7tU8T1PjqF0N7u3H1Ko_IHwvqkk2KDSMCMrovpyI-N0Wq_XlEoVm7RR1heLE6HZhewuP7JxNQEgPNQPw4IMCA2Pzp3ShV5LaOoCKroa15DUvnCbAs4FfMQLW4KzfvKwWo8iV5NDy4cxvo1MMMJUn8lRogVrQv8jlk-40VyCn7jQs9o8di7Dxz8OYX1diHRRud6aPq17dcbM8HEXUdHZON14aoUj5yIsDSNAhXePINLw8Ds">
-<span class="font-bold text-on-surface">Kevin</span>
-</td>
-<td class="p-md text-center text-secondary font-bold">1,115</td>
-<td class="p-md text-right font-mono text-on-surface-variant">81.2</td>
-</tr>
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant">3</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<img alt="User Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-bzg5Nsun_uWgMicRsioyiYKU366CqW4zHrzgCmI7OvKAfnugkkT2AXQIoA7Xj7Vt-vP0CXBH0O6HroxAZPKtNVis3KPMECePMPHeA0WpS4DZKvj2BWIbwRaxfXn-Zz-teACUt2UJX0KZG4FmPhG-8wyInuV3Qikol6cZeiAuHNN7N_kmzh-oPNuXnL8kpxSy5vXxSSj1qVsQ3sa2EGsdJsc2d8AC0fW4EsLJ0nziISN3rznNwRQsF87RO_sTO-3w-GzBQ1GqhkM">
-<span class="font-bold text-on-surface">Sarah</span>
-</td>
-<td class="p-md text-center text-tertiary font-bold">980</td>
-<td class="p-md text-right font-mono text-on-surface-variant">94.8</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="p-md text-center bg-surface-container-low border-t border-outline-variant/30">
-<button class="text-secondary font-label-sm text-label-sm uppercase hover:underline hover:text-secondary-fixed transition-colors">Afficher plus de joueurs</button>
-</div>
-</div>
-</section>
+            .material-symbols-outlined {
+                font-variation-settings:
+                    "FILL" 0,
+                    "wght" 400,
+                    "GRAD" 0,
+                    "opsz" 24;
+            }
 
-<!-- Leader board all time -->
- <section>
-<div class="flex items-center justify-between mb-lg">
-<div class="flex items-center gap-md">
-<span class="w-1 h-6 bg-secondary rounded-full"></span>
-<h2 class="font-headline-lg text-headline-lg">Classement Global</h2>
-</div>
-<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider hidden sm:block">Mise à jour: Il y a 5 min</span>
-</div>
-<div class="glass-panel rounded-2xl overflow-hidden">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-container-high border-b border-outline-variant">
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase w-20 text-center">Rang</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase">Joueur</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-center">Heure de réussite</th>
-<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Moyenne</th>
-</tr>
-</thead>
-<tbody class="font-body-md text-body-md">
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-primary/20 text-primary font-bold">1</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<div class="relative">
-<img alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeNliLtOxTC5vspy846oOg00tTTgHiJ5SYDlQCFCW4KA7aSfGm5sElEDEF182l52ZWDj0H8Pkf6jAkymH2ztG_j8d0w62VmreRQULH4QP3iQOWWB5Uadt70Vspr_L1X5UB0VqjWDnK_RmO1A71nb1K0qyBrO1NeGSGnfLMPEnsvR-5k4i4W9NjiOKyZsS37uO46qOwv5tyDEqaQh9PNf6vZU391ijeoqFJ9-T4dmDfT-NoU4tk80RcAl568aag2WzxlAuJ0np9fuY">
+            .glass-panel {
+                background: rgba(23, 31, 51, 0.78);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(149, 142, 160, 0.14);
+            }
+        </style>
+    </head>
+    <body class="min-h-screen">
+        <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-6">
+            <div>
+                <h1 class="font-display text-4xl font-bold leading-none text-primary">Cemantix</h1>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-textMuted">Friend rankings</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="session-label" class="hidden text-sm font-semibold text-textMuted sm:inline"></span>
+                <button id="logout-button" class="hidden h-10 items-center justify-center rounded-lg px-3 text-sm font-bold text-textMuted transition hover:bg-panelHigh hover:text-textMain" type="button">Deconnexion</button>
+                <button id="refresh-button" class="flex h-10 w-10 items-center justify-center rounded-lg text-textMuted transition hover:bg-panelHigh hover:text-textMain" type="button" title="Rafraichir">
+                    <span class="material-symbols-outlined">refresh</span>
+                </button>
+            </div>
+        </header>
 
-</div>
-<span class="font-bold">Léa</span>
-</td>
-<td class="p-md text-center text-primary font-bold">1,240</td>
-<td class="p-md text-right font-mono text-on-surface-variant">72.4</td>
-</tr>
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant">2</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<img alt="User Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX3KdyvVhCHxYGMfZ744ZdJhkzAyPBR7tU8T1PjqF0N7u3H1Ko_IHwvqkk2KDSMCMrovpyI-N0Wq_XlEoVm7RR1heLE6HZhewuP7JxNQEgPNQPw4IMCA2Pzp3ShV5LaOoCKroa15DUvnCbAs4FfMQLW4KzfvKwWo8iV5NDy4cxvo1MMMJUn8lRogVrQv8jlk-40VyCn7jQs9o8di7Dxz8OYX1diHRRud6aPq17dcbM8HEXUdHZON14aoUj5yIsDSNAhXePINLw8Ds">
-<span class="font-bold text-on-surface">Kevin</span>
-</td>
-<td class="p-md text-center text-secondary font-bold">1,115</td>
-<td class="p-md text-right font-mono text-on-surface-variant">81.2</td>
-</tr>
-<tr class="border-b border-outline-variant/30 hover:bg-surface-container transition-colors">
-<td class="p-md text-center">
-<span class="inline-flex w-8 h-8 items-center justify-center rounded-lg bg-surface-container-highest font-bold text-on-surface-variant">3</span>
-</td>
-<td class="p-md flex items-center gap-md">
-<img alt="User Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-bzg5Nsun_uWgMicRsioyiYKU366CqW4zHrzgCmI7OvKAfnugkkT2AXQIoA7Xj7Vt-vP0CXBH0O6HroxAZPKtNVis3KPMECePMPHeA0WpS4DZKvj2BWIbwRaxfXn-Zz-teACUt2UJX0KZG4FmPhG-8wyInuV3Qikol6cZeiAuHNN7N_kmzh-oPNuXnL8kpxSy5vXxSSj1qVsQ3sa2EGsdJsc2d8AC0fW4EsLJ0nziISN3rznNwRQsF87RO_sTO-3w-GzBQ1GqhkM">
-<span class="font-bold text-on-surface">Sarah</span>
-</td>
-<td class="p-md text-center text-tertiary font-bold">980</td>
-<td class="p-md text-right font-mono text-on-surface-variant">94.8</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="p-md text-center bg-surface-container-low border-t border-outline-variant/30">
-<button class="text-secondary font-label-sm text-label-sm uppercase hover:underline hover:text-secondary-fixed transition-colors">Afficher plus de joueurs</button>
-</div>
-</div>
-</section>
-</main>
-<!-- Background Decoration -->
-<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden" id="bg-decoration"><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 222.409px; height: 222.409px; left: 0.39175%; top: 87.7427%; background: rgb(208, 188, 255); animation-delay: 4.99152s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 476.812px; height: 476.812px; left: 85.5489%; top: 7.31863%; background: rgb(5, 102, 217); animation-delay: 4.365s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 200.529px; height: 200.529px; left: 6.04473%; top: 96.0679%; background: rgb(208, 188, 255); animation-delay: 2.01228s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 419.538px; height: 419.538px; left: 57.9838%; top: 74.3525%; background: rgb(5, 102, 217); animation-delay: 1.37311s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 464.255px; height: 464.255px; left: 12.9512%; top: 38.9636%; background: rgb(208, 188, 255); animation-delay: 1.78373s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 440.444px; height: 440.444px; left: 73.6565%; top: 53.4404%; background: rgb(5, 102, 217); animation-delay: 3.64836s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 435.552px; height: 435.552px; left: 16.3049%; top: 23.2771%; background: rgb(208, 188, 255); animation-delay: 1.07219s;"></div><div class="absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow" style="width: 381.557px; height: 381.557px; left: 26.8749%; top: 5.24496%; background: rgb(5, 102, 217); animation-delay: 0.23405s;"></div></div>
-<script>
-        // Atmospheric Background Particles
-        const bgContainer = document.getElementById('bg-decoration');
-        for (let i = 0; i < 8; i++) {
-            const particle = document.createElement('div');
-            const size = Math.random() * 300 + 200;
-            particle.className = 'absolute rounded-full opacity-[0.07] blur-[100px] animate-pulse-slow';
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.background = i % 2 === 0 ? '#d0bcff' : '#0566d9';
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            bgContainer.appendChild(particle);
-        }
-    </script>
+        <main class="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 pb-16">
+            <section>
+                <div class="mb-4 flex items-center gap-3">
+                    <span class="h-6 w-1 rounded-full bg-primary"></span>
+                    <h2 class="font-display text-2xl font-semibold">Compte</h2>
+                </div>
+                <form id="auth-form" class="glass-panel grid gap-4 rounded-lg p-5 md:grid-cols-[1fr_1fr_auto] md:items-end">
+                    <label class="grid gap-2">
+                        <span class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">Pseudo</span>
+                        <input id="auth-username" name="username" class="w-full rounded-lg border-0 bg-panelHigh px-4 py-3 text-base font-semibold text-textMain placeholder:text-textMuted/50 focus:ring-2 focus:ring-primary" maxlength="60" placeholder="Ex: Lea" required />
+                    </label>
+                    <label class="grid gap-2">
+                        <span class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">Mot de passe</span>
+                        <input id="auth-password" name="password" class="w-full rounded-lg border-0 bg-panelHigh px-4 py-3 text-base font-semibold text-textMain placeholder:text-textMuted/50 focus:ring-2 focus:ring-primary" required type="password" />
+                    </label>
+                    <div class="grid grid-cols-2 gap-2 md:flex">
+                        <button class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-4 font-bold text-primaryDark transition hover:bg-secondary active:scale-[0.98]" data-auth-action="login" type="submit">Connexion</button>
+                        <button class="inline-flex h-12 items-center justify-center rounded-lg bg-panelHigh px-4 font-bold text-textMain transition hover:bg-outline active:scale-[0.98]" data-auth-action="signin" type="submit">Inscription</button>
+                    </div>
+                </form>
+                <p id="auth-message" class="mt-3 min-h-6 text-sm font-semibold text-textMuted" role="status"></p>
+            </section>
 
+            <section>
+                <div class="mb-4 flex items-center gap-3">
+                    <span class="h-6 w-1 rounded-full bg-secondary"></span>
+                    <h2 class="font-display text-2xl font-semibold">Saisir son score</h2>
+                </div>
+                <form id="score-form" class="glass-panel grid gap-4 rounded-lg p-5 md:grid-cols-[180px_auto] md:items-end">
+                    <label class="grid gap-2">
+                        <span class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">Essais</span>
+                        <input id="attempts" name="attempts" class="w-full rounded-lg border-0 bg-panelHigh px-4 py-3 text-base font-semibold text-textMain placeholder:text-textMuted/50 focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50" min="1" placeholder="42" required type="number" />
+                    </label>
+                    <button id="score-submit" class="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-primaryDark transition hover:bg-secondary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50" type="submit">
+                        <span class="material-symbols-outlined text-[20px]">send</span>
+                        Envoyer le score
+                    </button>
+                </form>
+                <p id="form-message" class="mt-3 min-h-6 text-sm font-semibold text-textMuted" role="status"></p>
+            </section>
 
-</body></html>
+            <section class="grid gap-6 lg:grid-cols-2">
+                <div>
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="h-6 w-1 rounded-full bg-secondary"></span>
+                            <h2 class="font-display text-2xl font-semibold">Classement du jour</h2>
+                        </div>
+                        <span id="today-updated" class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">-</span>
+                    </div>
+                    <div class="glass-panel overflow-hidden rounded-lg">
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[440px] border-collapse text-left">
+                                <thead>
+                                    <tr class="border-b border-outline bg-panelHigh">
+                                        <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
+                                        <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
+                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Essais</th>
+                                        <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Heure</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="today-leaderboard" class="text-sm"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="h-6 w-1 rounded-full bg-accent"></span>
+                            <h2 class="font-display text-2xl font-semibold">Classement global</h2>
+                        </div>
+                        <span id="global-updated" class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">-</span>
+                    </div>
+                    <div class="glass-panel overflow-hidden rounded-lg">
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[480px] border-collapse text-left">
+                                <thead>
+                                    <tr class="border-b border-outline bg-panelHigh">
+                                        <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
+                                        <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
+                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Essais</th>
+                                        <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Soumis</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="global-leaderboard" class="text-sm"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const authForm = document.getElementById("auth-form");
+            const authMessage = document.getElementById("auth-message");
+            const form = document.getElementById("score-form");
+            const formMessage = document.getElementById("form-message");
+            const refreshButton = document.getElementById("refresh-button");
+            const logoutButton = document.getElementById("logout-button");
+            const sessionLabel = document.getElementById("session-label");
+            const attemptsInput = document.getElementById("attempts");
+            const scoreSubmit = document.getElementById("score-submit");
+            let authAction = "login";
+
+            function session() {
+                return {
+                    token: localStorage.getItem("cemantixApiToken") || "",
+                    username: localStorage.getItem("cemantixUsername") || "",
+                };
+            }
+
+            function setMessage(target, message, tone = "muted") {
+                const colors = {
+                    muted: "text-textMuted",
+                    success: "text-secondary",
+                    error: "text-accent",
+                };
+                target.textContent = message;
+                target.className = `mt-3 min-h-6 text-sm font-semibold ${colors[tone]}`;
+            }
+
+            function updateSessionUi() {
+                const current = session();
+                const isConnected = Boolean(current.token);
+
+                attemptsInput.disabled = !isConnected;
+                scoreSubmit.disabled = !isConnected;
+                logoutButton.classList.toggle("hidden", !isConnected);
+                logoutButton.classList.toggle("flex", isConnected);
+                sessionLabel.classList.toggle("hidden", !isConnected);
+                sessionLabel.textContent = isConnected ? `Connecte: ${current.username}` : "";
+
+                if (!isConnected) {
+                    setMessage(formMessage, "Connecte-toi pour envoyer ton score.");
+                } else {
+                    setMessage(formMessage, "Ton token est garde sur cet appareil pour les prochains envois.", "success");
+                }
+            }
+
+            function escapeHtml(value) {
+                return String(value).replace(/[&<>'"]/g, (char) => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "'": "&#039;",
+                    '"': "&quot;",
+                })[char]);
+            }
+
+            function renderRows(targetId, rows, emptyText, includeDate) {
+                const target = document.getElementById(targetId);
+
+                if (!rows.length) {
+                    target.innerHTML = `<tr><td class="p-6 text-center text-textMuted" colspan="4">${emptyText}</td></tr>`;
+                    return;
+                }
+
+                target.innerHTML = rows.map((row, index) => {
+                    const rankClass = index === 0 ? "bg-primary/20 text-primary" : "bg-panelHigh text-textMuted";
+                    const submittedLabel = includeDate
+                        ? `${escapeHtml(row.submitted_date)} ${escapeHtml(row.submitted_time)}`
+                        : escapeHtml(row.submitted_time);
+
+                    return `
+                        <tr class="border-b border-outline/50 transition last:border-b-0 hover:bg-panelHigh/70">
+                            <td class="p-4 text-center">
+                                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg font-bold ${rankClass}">${index + 1}</span>
+                            </td>
+                            <td class="p-4 font-bold text-textMain">${escapeHtml(row.player_name)}</td>
+                            <td class="p-4 text-center font-bold text-secondary">${escapeHtml(row.attempts)}</td>
+                            <td class="p-4 text-right font-mono text-textMuted">${submittedLabel}</td>
+                        </tr>
+                    `;
+                }).join("");
+            }
+
+            async function parseJsonResponse(response) {
+                const text = await response.text();
+
+                try {
+                    return JSON.parse(text);
+                } catch (error) {
+                    const plainText = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+                    throw new Error(plainText || "Reponse serveur invalide.");
+                }
+            }
+
+            async function loadLeaderboard(scope) {
+                const response = await fetch(`leaderboard.php?scope=${scope}`, {
+                    headers: { Accept: "application/json" },
+                });
+                const data = await parseJsonResponse(response);
+
+                if (!response.ok || !data.success) {
+                    throw new Error(data.message || "Impossible de charger le classement.");
+                }
+
+                return data.leaderboard;
+            }
+
+            async function refreshLeaderboards() {
+                refreshButton.disabled = true;
+                refreshButton.classList.add("opacity-60");
+
+                try {
+                    const [todayRows, globalRows] = await Promise.all([
+                        loadLeaderboard("today"),
+                        loadLeaderboard("global"),
+                    ]);
+
+                    renderRows("today-leaderboard", todayRows, "Aucune soumission aujourd'hui.", false);
+                    renderRows("global-leaderboard", globalRows, "Aucune soumission pour le moment.", true);
+
+                    const now = new Date().toLocaleTimeString("fr-FR", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    });
+                    document.getElementById("today-updated").textContent = `Maj ${now}`;
+                    document.getElementById("global-updated").textContent = `Maj ${now}`;
+                } catch (error) {
+                    setMessage(formMessage, error.message, "error");
+                } finally {
+                    refreshButton.disabled = false;
+                    refreshButton.classList.remove("opacity-60");
+                }
+            }
+
+            authForm.addEventListener("click", (event) => {
+                const button = event.target.closest("[data-auth-action]");
+                if (button) {
+                    authAction = button.dataset.authAction;
+                }
+            });
+
+            authForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                setMessage(authMessage, authAction === "login" ? "Connexion..." : "Inscription...");
+
+                try {
+                    const formData = new FormData(authForm);
+                    const endpoint = authAction === "login" ? "login.php" : "signin.php";
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        body: formData,
+                        headers: { Accept: "application/json" },
+                    });
+                    const data = await parseJsonResponse(response);
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.message || "Authentification impossible.");
+                    }
+
+                    localStorage.setItem("cemantixApiToken", data.token);
+                    localStorage.setItem("cemantixUsername", formData.get("username"));
+                    authForm.reset();
+                    setMessage(authMessage, "Connecte. Tu peux envoyer tes requetes avec ton token.", "success");
+                    updateSessionUi();
+                } catch (error) {
+                    setMessage(authMessage, error.message, "error");
+                }
+            });
+
+            logoutButton.addEventListener("click", () => {
+                localStorage.removeItem("cemantixApiToken");
+                localStorage.removeItem("cemantixUsername");
+                updateSessionUi();
+                setMessage(authMessage, "Deconnecte.");
+            });
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const current = session();
+
+                if (!current.token) {
+                    setMessage(formMessage, "Connecte-toi avant d'envoyer ton score.", "error");
+                    return;
+                }
+
+                setMessage(formMessage, "Envoi en cours...");
+
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch("submit_score.php", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${current.token}`,
+                        },
+                    });
+                    const data = await parseJsonResponse(response);
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.message || "Le score n'a pas pu etre envoye.");
+                    }
+
+                    form.reset();
+                    setMessage(formMessage, "Score envoye. Le classement est a jour.", "success");
+                    await refreshLeaderboards();
+                } catch (error) {
+                    setMessage(formMessage, error.message, "error");
+                }
+            });
+
+            refreshButton.addEventListener("click", refreshLeaderboards);
+            updateSessionUi();
+            refreshLeaderboards();
+        </script>
+    </body>
+</html>
+
