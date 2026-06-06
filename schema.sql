@@ -1,4 +1,6 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE SCHEMA IF NOT EXISTS public;
+
+CREATE TABLE IF NOT EXISTS public.users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
@@ -6,14 +8,16 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS submissions (
+CREATE TABLE IF NOT EXISTS public.submissions (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
     submitted_word VARCHAR(120) NOT NULL,
     submitted_day DATE NOT NULL,
     submitted_at TIMESTAMP NOT NULL,
     CONSTRAINT uniq_user_submitted_day UNIQUE (user_id, submitted_day)
 );
 
-CREATE INDEX IF NOT EXISTS idx_submitted_at ON submissions (submitted_at);
-CREATE INDEX IF NOT EXISTS idx_submitted_day_time ON submissions (submitted_day, submitted_at, id);
+CREATE INDEX IF NOT EXISTS idx_submitted_at ON public.submissions (submitted_at);
+
+CREATE INDEX IF NOT EXISTS idx_submitted_day_time
+ON public.submissions (submitted_day, submitted_at, id);

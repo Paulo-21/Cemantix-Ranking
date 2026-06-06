@@ -50,7 +50,7 @@ $leaderboard = array_map(static function (array $row) use ($paris): array {
         "submitted_date" => $localTime->format("d/m/Y"),
     ];
 }, $stmt->fetchAll());
-
+echo $scope;
 echo json_encode([
     "success" => true,
     "scope" => $scope,

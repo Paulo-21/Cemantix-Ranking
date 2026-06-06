@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Cemantix Friends - Classements</title>
+        <title>Cemantix Stagios - Classements</title>
         <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -59,7 +59,7 @@
         <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-6">
             <div>
                 <h1 class="font-display text-4xl font-bold leading-none text-primary">Cemantix</h1>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-textMuted">Friend rankings</p>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-textMuted">Stagios rankings</p>
             </div>
             <div class="flex items-center gap-3">
                 <span id="session-label" class="hidden text-sm font-semibold text-textMuted sm:inline"></span>
@@ -127,7 +127,7 @@
                                     <tr class="border-b border-outline bg-panelHigh">
                                         <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
                                         <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
-                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>
+                                        <!--<th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>-->
                                         <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Heure</th>
                                     </tr>
                                 </thead>
@@ -152,8 +152,8 @@
                                     <tr class="border-b border-outline bg-panelHigh">
                                         <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
                                         <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
-                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>
-                                        <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Soumis</th>
+                                        <!--<th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>
+                                        <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Soumis</th>-->
                                     </tr>
                                 </thead>
                                 <tbody id="global-leaderboard" class="text-sm"></tbody>
@@ -243,10 +243,10 @@
                                 <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg font-bold ${rankClass}">${index + 1}</span>
                             </td>
                             <td class="p-4 font-bold text-textMain">${escapeHtml(row.player_name)}</td>
-                            <td class="p-4 text-center font-bold text-secondary">${escapeHtml(row.submitted_word)}</td>
                             <td class="p-4 text-right font-mono text-textMuted">${submittedLabel}</td>
-                        </tr>
-                    `;
+                            </tr>
+                            `;
+                            //<td class="p-4 text-center font-bold text-secondary">${escapeHtml(row.submitted_word)}</td>
                 }).join("");
             }
 
@@ -290,6 +290,7 @@
                     const now = new Date().toLocaleTimeString("fr-FR", {
                         hour: "2-digit",
                         minute: "2-digit",
+                        seconde:"2-digit"
                     });
                     document.getElementById("today-updated").textContent = `Maj ${now}`;
                     document.getElementById("global-updated").textContent = `Maj ${now}`;
@@ -329,7 +330,7 @@
                     localStorage.setItem("cemantixApiToken", data.token);
                     localStorage.setItem("cemantixUsername", formData.get("username"));
                     authForm.reset();
-                    setMessage(authMessage, "Connecte. Tu peux envoyer tes requetes avec ton token.", "success");
+                    //setMessage(authMessage, "Connecte. Tu peux envoyer tes requetes avec ton token.", "success");
                     updateSessionUi();
                 } catch (error) {
                     setMessage(authMessage, error.message, "error");

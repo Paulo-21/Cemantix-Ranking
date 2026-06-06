@@ -6,10 +6,10 @@ header("Content-Type: application/json; charset=utf-8");
 
 require __DIR__ . "/db.php";
 
-//$username = "paul";
-//$password = "r";
 $username = trim($_POST["username"] ?? "");
 $password = $_POST["password"] ?? "";
+//$username = "paul";
+//$password = "r";
 
 if ($username === "" || $password === "") {
     http_response_code(400);
