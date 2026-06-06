@@ -29,7 +29,7 @@ if ($scope === "today") {
 }
 
 $stmt = $pdo->prepare(
-    "SELECT u.username, s.attempts, s.submitted_at
+    "SELECT u.username, s.submitted_word, s.submitted_at
      FROM submissions s
      INNER JOIN users u ON u.id = s.user_id
      {$where}
@@ -45,7 +45,7 @@ $leaderboard = array_map(static function (array $row) use ($paris): array {
 
     return [
         "player_name" => $row["username"],
-        "attempts" => (int) $row["attempts"],
+        "submitted_word" => $row["submitted_word"],
         "submitted_time" => $localTime->format("H:i:s"),
         "submitted_date" => $localTime->format("d/m/Y"),
     ];

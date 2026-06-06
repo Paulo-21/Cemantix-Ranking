@@ -71,7 +71,7 @@
         </header>
 
         <main class="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 pb-16">
-            <section>
+            <section id="auth-section">
                 <div class="mb-4 flex items-center gap-3">
                     <span class="h-6 w-1 rounded-full bg-primary"></span>
                     <h2 class="font-display text-2xl font-semibold">Compte</h2>
@@ -96,16 +96,16 @@
             <section>
                 <div class="mb-4 flex items-center gap-3">
                     <span class="h-6 w-1 rounded-full bg-secondary"></span>
-                    <h2 class="font-display text-2xl font-semibold">Saisir son score</h2>
+                    <h2 class="font-display text-2xl font-semibold">Saisir le mot</h2>
                 </div>
                 <form id="score-form" class="glass-panel grid gap-4 rounded-lg p-5 md:grid-cols-[180px_auto] md:items-end">
                     <label class="grid gap-2">
-                        <span class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">Essais</span>
-                        <input id="attempts" name="attempts" class="w-full rounded-lg border-0 bg-panelHigh px-4 py-3 text-base font-semibold text-textMain placeholder:text-textMuted/50 focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50" min="1" placeholder="42" required type="text" />
+                        <span class="text-xs font-semibold uppercase tracking-[0.16em] text-textMuted">Mot</span>
+                        <input id="submitted-word" name="submitted_word" class="w-full rounded-lg border-0 bg-panelHigh px-4 py-3 text-base font-semibold text-textMain placeholder:text-textMuted/50 focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50" maxlength="120" placeholder="Ex: cap" required type="text" />
                     </label>
                     <button id="score-submit" class="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-primaryDark transition hover:bg-secondary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50" type="submit">
                         <span class="material-symbols-outlined text-[20px]">send</span>
-                        Envoyer le score
+                        Envoyer le mot
                     </button>
                 </form>
                 <p id="form-message" class="mt-3 min-h-6 text-sm font-semibold text-textMuted" role="status"></p>
@@ -127,7 +127,7 @@
                                     <tr class="border-b border-outline bg-panelHigh">
                                         <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
                                         <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
-                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Essais</th>
+                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>
                                         <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Heure</th>
                                     </tr>
                                 </thead>
@@ -152,7 +152,7 @@
                                     <tr class="border-b border-outline bg-panelHigh">
                                         <th class="w-16 p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Rang</th>
                                         <th class="p-4 text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Joueur</th>
-                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Essais</th>
+                                        <th class="p-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Mot</th>
                                         <th class="p-4 text-right text-xs font-bold uppercase tracking-[0.14em] text-textMuted">Soumis</th>
                                     </tr>
                                 </thead>
@@ -172,7 +172,8 @@
             const refreshButton = document.getElementById("refresh-button");
             const logoutButton = document.getElementById("logout-button");
             const sessionLabel = document.getElementById("session-label");
-            const attemptsInput = document.getElementById("attempts");
+            const authSection = document.getElementById("auth-section");
+            const submittedWordInput = document.getElementById("submitted-word");
             const scoreSubmit = document.getElementById("score-submit");
             let authAction = "login";
 
@@ -197,7 +198,8 @@
                 const current = session();
                 const isConnected = Boolean(current.token);
 
-                attemptsInput.disabled = !isConnected;
+                authSection.classList.toggle("hidden", isConnected);
+                submittedWordInput.disabled = !isConnected;
                 scoreSubmit.disabled = !isConnected;
                 logoutButton.classList.toggle("hidden", !isConnected);
                 logoutButton.classList.toggle("flex", isConnected);
@@ -205,7 +207,7 @@
                 sessionLabel.textContent = isConnected ? `Connecte: ${current.username}` : "";
 
                 if (!isConnected) {
-                    setMessage(formMessage, "Connecte-toi pour envoyer ton score.");
+                    setMessage(formMessage, "Connecte-toi pour envoyer ton mot.");
                 } else {
                     setMessage(formMessage, "Ton token est garde sur cet appareil pour les prochains envois.", "success");
                 }
@@ -241,7 +243,7 @@
                                 <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg font-bold ${rankClass}">${index + 1}</span>
                             </td>
                             <td class="p-4 font-bold text-textMain">${escapeHtml(row.player_name)}</td>
-                            <td class="p-4 text-center font-bold text-secondary">${escapeHtml(row.attempts)}</td>
+                            <td class="p-4 text-center font-bold text-secondary">${escapeHtml(row.submitted_word)}</td>
                             <td class="p-4 text-right font-mono text-textMuted">${submittedLabel}</td>
                         </tr>
                     `;
@@ -346,7 +348,7 @@
                 const current = session();
 
                 if (!current.token) {
-                    setMessage(formMessage, "Connecte-toi avant d'envoyer ton score.", "error");
+                    setMessage(formMessage, "Connecte-toi avant d'envoyer ton mot.", "error");
                     return;
                 }
 
@@ -365,11 +367,11 @@
                     const data = await parseJsonResponse(response);
 
                     if (!response.ok || !data.success) {
-                        throw new Error(data.message || "Le score n'a pas pu etre envoye.");
+                        throw new Error(data.message || "Le mot n'a pas pu etre envoye.");
                     }
 
                     form.reset();
-                    setMessage(formMessage, "Score envoye. Le classement est a jour.", "success");
+                    setMessage(formMessage, "Mot envoye. Le classement est a jour.", "success");
                     await refreshLeaderboards();
                 } catch (error) {
                     setMessage(formMessage, error.message, "error");
@@ -382,4 +384,7 @@
         </script>
     </body>
 </html>
+
+
+
 

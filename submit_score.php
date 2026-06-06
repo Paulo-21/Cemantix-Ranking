@@ -18,25 +18,27 @@ function requestToken(): string
 }
 
 $token = requestToken();
-$attempts = filter_input(INPUT_POST, "attempts", FILTER_VALIDATE_INT);
+$submittedWord = trim($_POST["submitted_word"] ?? "");
 
 if ($token === "") {
     http_response_code(401);
     echo json_encode([
         "success" => false,
-        "message" => "Token manquant. Connecte-toi avant d'envoyer ton score.",
+        "message" => "Token manquant. Connecte-toi avant d'envoyer ton mot.",
     ]);
     exit;
 }
 
-if ($attempts === false || $attempts < 1) {
+if ($submittedWord === "") {
     http_response_code(400);
     echo json_encode([
         "success" => false,
-        "message" => "Score invalide.",
+        "message" => "Mot invalide.",
     ]);
     exit;
 }
+
+$submittedWord = function_exists("mb_substr") ? mb_substr($submittedWord, 0, 120) : substr($submittedWord, 0, 120);
 
 $stmt = $pdo->prepare("SELECT id, username FROM users WHERE api_token = ?");
 $stmt->execute([$token]);
@@ -59,18 +61,18 @@ $submittedAt = $now->setTimezone($utc)->format("Y-m-d H:i:s");
 
 try {
     $stmt = $pdo->prepare(
-        "INSERT INTO submissions (user_id, attempts, submitted_day, submitted_at)
+        "INSERT INTO submissions (user_id, submitted_word, submitted_day, submitted_at)
          VALUES (?, ?, ?, ?)
          RETURNING id"
     );
-    $stmt->execute([(int) $user["id"], $attempts, $submittedDay, $submittedAt]);
+    $stmt->execute([(int) $user["id"], $submittedWord, $submittedDay, $submittedAt]);
     $submissionId = (int) $stmt->fetchColumn();
 } catch (PDOException $exception) {
     if ($exception->getCode() === "23505") {
         http_response_code(409);
         echo json_encode([
             "success" => false,
-            "message" => "Tu as deja soumis un score aujourd'hui.",
+            "message" => "Tu as deja soumis un mot aujourd'hui.",
         ]);
         exit;
     }

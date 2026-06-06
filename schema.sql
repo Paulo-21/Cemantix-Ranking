@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS submissions (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    attempts INTEGER NOT NULL CHECK (attempts > 0),
+    submitted_word VARCHAR(120) NOT NULL,
     submitted_day DATE NOT NULL,
     submitted_at TIMESTAMP NOT NULL,
     CONSTRAINT uniq_user_submitted_day UNIQUE (user_id, submitted_day)
