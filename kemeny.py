@@ -1,4 +1,5 @@
 from ortools.sat.python import cp_model
+from datetime import datetime, timezone
 import psycopg2
 import os
 
@@ -6,6 +7,7 @@ def fetch_wins(conn):
     """Récupère la matrice de victoires depuis PostgreSQL."""
     with conn.cursor() as cur:
         cur.execute("""
+            
             SELECT s.user_id, u.username, s.submitted_day
             FROM submissions s
             INNER JOIN users u ON u.id = s.user_id
@@ -53,7 +55,7 @@ def solve_kemeny(users: list, wins: dict) -> list:
     # Contrainte 1 : antisymétrie — x[i][j] + x[j][i] = 1
     for i in range(n):
         for j in range(i + 1, n):
-            model.add_bool_xor([x[i, j] + x[j, i]])
+            model.add_bool_xor([x[i, j] , x[j, i]])
             #model.add(x[i, j] + x[j, i] == 1)
 
     # Contrainte 2 : transitivité — pas de cycle A > B > C > A
@@ -94,20 +96,56 @@ def solve_kemeny(users: list, wins: dict) -> list:
 
 def upsert_rankings(conn, ordered_users: list, usernames: dict):
     with conn.cursor() as cur:
+        cur.execute("""
+            SELECT DISTINCT ON (user_id)
+                user_id,
+                id AS submission_id,
+                submitted_at
+            FROM submissions
+            ORDER BY user_id, submitted_at DESC;
+        """)
+
+        rows = cur.fetchall()
+
+        last_sub_map = {
+            user_id: (submission_id, submitted_at)
+            for user_id, submission_id, submitted_at in rows
+        }
+        cur.execute("""
+            DELETE FROM kemeny_ranking_cache
+            WHERE ranking_day = CURRENT_DATE;"""
+        )
         for rank0, uid in enumerate(ordered_users):
             cur.execute("""
-                INSERT INTO rankings (user_id, username, rank, updated_at)
-                VALUES (%s, %s, %s, NOW())
-                ON CONFLICT (user_id) DO UPDATE SET
-                    username   = EXCLUDED.username,
-                    rank       = EXCLUDED.rank,
-                    updated_at = EXCLUDED.updated_at
-            """, (uid, usernames[uid], rank0 + 1))
+            INSERT INTO kemeny_ranking_cache (
+                ranking_day,
+                user_id,
+                position,
+                last_submission_at,
+                last_submission_id,
+                computed_at
+            )
+            VALUES (%s, %s, %s, %s, %s, %s);
+        """, (
+            datetime.now().date(),
+            uid,
+            rank0 + 1,
+            last_sub_map[uid][1],#submitted_at,
+            last_sub_map[uid][0],
+            datetime.now(),
+        ))
     conn.commit()
 
 
 def recompute_ranking():
-    conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    conn = psycopg2.connect(
+        dbname="cemantix_game",
+        user="paul",
+        password="CemantixThales",
+        host="localhost",
+        port=5432
+    )
+    #conn = psycopg2.connect(os.environ["DATABASE_URL"])
     try:
         users, usernames, wins = fetch_wins(conn)
         ordered = solve_kemeny(users, wins)
