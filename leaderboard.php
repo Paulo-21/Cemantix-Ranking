@@ -81,6 +81,7 @@ $leaderboard = array_map(static function (array $row) use ($paris): array {
         ];
         }, $stmt->fetchAll());
 }
+#var_dump($leaderboard);
 echo json_encode([
     "success" => true,
     "scope" => $scope,
